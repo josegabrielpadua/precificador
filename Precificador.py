@@ -1251,6 +1251,7 @@ elif selected == "IA":
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
+
     if texto := st.chat_input("Diga alguma coisa"):
       
         st.session_state.chat_history.append({"role": "user", "content": texto})
@@ -1261,6 +1262,7 @@ elif selected == "IA":
         response = ai_google.interaction()
 
         st.session_state.chat_history.append({"role": "assistant", "content": response.content})
+
 
     for message in st.session_state.chat_history:
         with st.chat_message(message["role"]):
