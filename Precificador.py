@@ -1399,7 +1399,10 @@ elif selected == "IA":
                             Se o usuário perguntar sobre Venda direta:
                              
                             Você deve informar que é um campo para fazer calculos sem conter nenhuma tarifa fixa ou comissão embutida no cálculo. 
-                             
+                            
+                            Se o usuário perguntar sobre a aba Frete Magazine, você deve informar ao usuário que é uma aba onde é possível dar upload em um arquivo excel, onde antigamente o usuário baixava a planilha dos produtos e podia dar upload na planilha nessa aba,
+                            o usuário escolhia qual era a reputação dele no marketplace e ele calculava os fretes de cada produto baseado em um cálculo de tamanho e peso que tinha antigamente na plataforma. Atualmente está desatualizado, por isso não é funcional por agora. 
+    
                              ''',
         response=f'{texto}')
 
