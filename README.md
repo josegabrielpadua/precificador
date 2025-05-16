@@ -20,7 +20,7 @@ O objetivo desta IA é fornecer assistência relacionada ao uso do precificador 
 
 Este documento descreve as funcionalidades e o uso do aplicativo Precificador Inteligente, desenvolvido para auxiliar no cálculo de preços de venda em diversas plataformas de e-commerce, estimativa de fretes e interação com uma IA assistente.
 
-![Menu Inicial](documentação/imagens/Pasted image 20250516103003.png)
+![Menu Inicial](documentação/imagens/pasted_image_20250516103003.png)
 
 ## 2. Menu Principal
 
@@ -30,13 +30,13 @@ Ao acessar o aplicativo, você encontrará um menu na barra lateral esquerda com
 *   **Frete Magazine**: Para calcular o custo de frete estimado para produtos na Magazine Luiza.
 *   **IA**: Para interagir com um assistente virtual baseado em Inteligência Artificial.
 
-![1](documentação/imagens/Pasted image 20250516103023.png)
+![1](documentação/imagens/pasted_image_20250516103023.png)
 
 ## 3. Precificador
 
 Esta é a seção principal para calcular preços de venda, custos e margens.
 
-![2](documentação/imagens/Pasted image 20250516103132.png)
+![2](documentação/imagens/pasted_image_20250516103132.png)
 
 Primeiro, escolha a plataforma para a qual deseja calcular o preço no seletor "Escolha a Plataforma:":
 
@@ -73,7 +73,7 @@ Permite calcular o preço de venda para produtos na Amazon, considerando diferen
 **Botão:**
 *   `Calcular Preço Amazon`: Inicia o cálculo.
 
-![3](documentação/imagens/Pasted image 20250516103223.png)
+![3](documentação/imagens/pasted_image_20250516103223.png)
 
 **Resultados Apresentados (`display_detailed_results`):**
 Após o cálculo, são exibidos:
@@ -95,10 +95,10 @@ Após o cálculo, são exibidos:
 7.  **Visualização da Composição do Preço (Baseado no Preço Sugerido):**
     *   Um gráfico de pizza mostrando a distribuição dos custos e lucro no preço de venda sugerido.
 
-![4](documentação/imagens/Pasted image 20250516103312.png)
-![5](documentação/imagens/Pasted image 20250516103332.png)
+![4](documentação/imagens/pasted_image_20250516103312.png)
+![5](documentação/imagens/pasted_image_20250516103332.png)
 
-![6](documentação/imagens/Pasted image 20250516103414.png)
+![6](documentação/imagens/pasted_image_20250516103414.png)
 ### 3.2. Magazine Luiza
 
 Calcula o preço para a Magazine Luiza, com opções de comissão e tarifa fixa.
