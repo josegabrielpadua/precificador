@@ -1,7 +1,9 @@
 
 # Documentação do Precificador Inteligente 
 
-[Aplicativo](innovamed.streamlit.app)
+Clique no Precificador para conferir:
+
+[Precificador](https://innovamed.streamlit.app)
 
 # Novidade 
 
