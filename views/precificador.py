@@ -221,15 +221,19 @@ def handle_shopee() -> None:
         imposto  = st.number_input("Imposto (%):", value=0.0, min_value=0.0, max_value=100.0, step=0.1, format="%.1f", key="shp_imposto")
         desconto = st.number_input("Desconto (%):", min_value=0.0, max_value=100.0, value=0.0, step=0.1, format="%.1f", key="shp_desconto")
 
+    # Exibe a comissão da faixa atual em tempo real
+    comissao_pct, tarifa_fixa = shopee.calcular_comissao(preco_venda)
     st.info(
-        f"Comissão fixa de {shopee.COMISSAO * 100:.0f}%, "
-        f"Tarifa fixa de R$ {shopee.TARIFA_FIXA:.2f}."
+        f"📋 Comissão para R$ {preco_venda:.2f}: "
+        f"**{comissao_pct * 100:.0f}% + R$ {tarifa_fixa:.2f}** "
+        f"(tabela CNPJ 01/03/2026)"
     )
 
     if not st.button("Calcular Preço Shopee", key="shp_calc_btn"):
         return
 
     def calcular_lucro(preco: float) -> float:
+        # comissão recalculada a cada iteração — muda de faixa conforme o preço
         return shopee.calcular_lucro(
             quantidade=quantidade, preco_custo=preco_custo, frete=frete,
             preco_venda=preco, imposto=imposto, desconto=desconto,
@@ -239,14 +243,24 @@ def handle_shopee() -> None:
         return _margem_com_desconto(lucro, preco, desconto)
 
     preco_venda_inicial = preco_venda
-    lucro_inicial = calcular_lucro(preco_venda_inicial)
-    preco_desc_inicial = preco_venda_inicial * (1 - desconto / 100)
-    margem_inicial = calcular_margem(lucro_inicial, preco_venda_inicial)
+    lucro_inicial       = calcular_lucro(preco_venda_inicial)
+    preco_desc_inicial  = preco_venda_inicial * (1 - desconto / 100)
+    margem_inicial      = calcular_margem(lucro_inicial, preco_venda_inicial)
 
     preco_sug, lucro_sug, margem_sug = encontrar_preco_otimo(
         preco_venda_inicial, margem_lucro_desejado, calcular_lucro, calcular_margem, desconto,
     )
     preco_desc_sug = preco_sug * (1 - desconto / 100)
+
+    # Busca a comissão da faixa do preço sugerido para exibir no detalhamento
+    comissao_pct_sug, tarifa_fixa_sug = shopee.calcular_comissao(preco_sug)
+
+    if comissao_pct_sug != comissao_pct or tarifa_fixa_sug != tarifa_fixa:
+        st.caption(
+            f"📋 Comissão mudou com o preço sugerido: "
+            f"{comissao_pct * 100:.0f}% + R${tarifa_fixa:.2f} "
+            f"→ {comissao_pct_sug * 100:.0f}% + R${tarifa_fixa_sug:.2f}"
+        )
 
     exibir_resultados({
         "platform": "Shopee",
@@ -266,20 +280,18 @@ def handle_shopee() -> None:
         "custo_total_produto": preco_custo * quantidade,
         "imposto_percent": imposto,
         "valor_imposto": preco_desc_sug * (imposto / 100),
-        "comissao_percent": shopee.COMISSAO,
-        "valor_comissao_var": preco_desc_sug * shopee.COMISSAO,
+        "comissao_percent": comissao_pct_sug,
+        "valor_comissao_var": preco_desc_sug * comissao_pct_sug,
         "comissao_fixa": 0.0,
         "valor_comissao_fixa": 0.0,
-        "tarifa": shopee.TARIFA_FIXA,
-        "valor_tarifa": shopee.TARIFA_FIXA,
-        "frete": frete,
+        "tarifa_inicial": tarifa_fixa,
+        "valor_tarifa": tarifa_fixa_sug,
         "valor_frete": frete,
         "desconto_percent": desconto,
         "cashback_percent": 0.0,
         "cashback_calculado": 0.0,
         "rebate_valor": 0.0,
     })
-
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Mercado Livre
